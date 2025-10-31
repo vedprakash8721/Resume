@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abhishek Kushwaha — Interactive Résumé</title>
+  <meta name="description" content="Abhishek Kushwaha — B.Tech Computer Science | Machine Learning, Data Science & Generative AI. Interactive résumé / portfolio." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo="> 
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa6b2; --accent:#0ea5a4; --glass: rgba(255,255,255,0.04);
+      --font-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    [data-theme='light']{ --bg:#f7fbff; --card:#ffffff; --muted:#5b6b76; --accent:#0369a1; --glass: rgba(2,6,23,0.04); }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,var(--bg),#04202a 100%);color:#e6eef6}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:980px;margin:28px auto;padding:24px}
+    .top{display:grid;grid-template-columns:1fr 240px;gap:20px;align-items:start}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:22px;border-radius:14px;box-shadow:0 6px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px)}
+    .profile{display:flex;gap:16px;align-items:center}
+    .avatar{width:96px;height:96px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#6ee7b7);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:white}
+    h1{margin:0;font-size:22px}
+    h2{margin:6px 0 14px;font-size:14px;color:var(--muted)}
+    .cta{display:flex;flex-direction:column;gap:10px}
+    .btn{display:inline-flex;gap:10px;align-items:center;padding:10px 14px;border-radius:10px;background:var(--accent);color:#04202a;font-weight:600;border:none;cursor:pointer}
+    .outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .section{margin-top:18px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .skill{margin-bottom:10px}
+    .progress{height:10px;background:rgba(255,255,255,0.06);border-radius:8px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#7dd3fc);width:0;transition:width 900ms cubic-bezier(.2,.8,.2,1)}
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .proj{padding:12px;border-radius:10px;background:var(--card);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .muted{color:var(--muted);font-size:13px}
+    footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
+    .skill-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+    .meta{display:flex;flex-direction:column;gap:8px}
+    .links{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(2,6,23,0.6),rgba(2,6,23,0.6));}
+    .modal.open{display:flex}
+    .modal-card{width:720px;max-width:95%;background:var(--card);padding:20px;border-radius:12px}
+    .close{background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer}
+    /* responsive */
+    @media (max-width:880px){.top{grid-template-columns:1fr}.cta{flex-direction:row;justify-content:space-between}.avatar{width:72px;height:72px;font-size:20px}}
+  </style>
+</head>
+<body data-theme="dark">
+  <div class="container">
+    <div class="top">
+      <div class="card">
+        <div class="profile">
+          <div class="avatar">AK</div>
+          <div style="flex:1">
+            <h1>Abhishek Kushwaha</h1>
+            <h2>B.Tech Computer Science — Machine Learning | Data Science | Generative AI</h2>
+            <div class="muted">Lucknow • +91 95196 69291 • <a href="mailto:abhishek.kushwaha.cs@gmail.com">abhishek.kushwaha.cs@gmail.com</a></div>
+            <div class="links" style="margin-top:10px">
+              <a class="chip" href="https://github.com/vedprakash8721" target="_blank">GitHub</a>
+              <a class="chip" href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/" target="_blank">LinkedIn</a>
+              <a class="chip" href="https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/" target="_blank">Live App</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <strong>Summary</strong>
+          <p class="muted">Analytical and goal-oriented BTech Computer Science student specializing in Machine Learning, Data Science, and Generative AI. Skilled in Python and data visualization with project experience in Cricket Score Prediction and Stock Trend Forecasting. Passionate about developing intelligent AI solutions for real-world impact.</p>
+        </div>
+
+        <div class="section grid-2">
+          <div>
+            <strong>Education</strong>
+            <p class="muted" style="margin-top:8px">B.Tech, Computer Science — Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow <br><small class="muted">Aug 2022 – Mar 2026</small></p>
+
+            <div class="section">
+              <strong>Skills</strong>
+              <div style="margin-top:8px">
+                <div class="skill">
+                  <div class="skill-label"><span>Python</span><span class="muted">Expert</span></div>
+                  <div class="progress"><i data-w="95%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="skill-label"><span>Machine Learning</span><span class="muted">Advanced</span></div>
+                  <div class="progress"><i data-w="88%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="skill-label"><span>Data Visualization</span><span class="muted">Advanced</span></div>
+                  <div class="progress"><i data-w="82%"></i></div>
+                </div>
+                <div class="skill">
+                  <div class="skill-label"><span>Time-series / LSTM</span><span class="muted">Intermediate</span></div>
+                  <div class="progress"><i data-w="76%"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <strong>Certifications</strong>
+            <ul class="muted" style="margin-top:8px;margin-left:18px">
+              <li>Python Programming & Data Analysis — Intellipaat (Feb 2025 – Apr 2025)</li>
+              <li>Data Science & Generative AI with Python — PW Skills (June 2025 – Dec 2025)</li>
+            </ul>
+
+            <div class="section">
+              <strong>Contact & Quick Links</strong>
+              <div class="meta" style="margin-top:8px">
+                <div class="muted">Email: <a href="mailto:abhishek.kushwaha.cs@gmail.com">abhishek.kushwaha.cs@gmail.com</a></div>
+                <div class="muted">Phone: +91 95196 69291</div>
+                <div class="muted">GitHub: <a href="https://github.com/vedprakash8721" target="_blank">vedprakash8721</a></div>
+                <div class="muted">LinkedIn: <a href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/" target="_blank">abhishek-kushwaha</a></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="section">
+          <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+            <strong>Actions</strong>
+            <div>
+              <button id="downloadBtn" class="btn">Download PDF</button>
+              <button id="themeToggle" class="btn outline" style="margin-left:8px">Toggle Theme</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+          <div style="width:100%;text-align:center">
+            <strong>Quick Stats</strong>
+            <div style="margin-top:14px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap">
+              <div style="flex:1;min-width:110px;background:var(--glass);padding:12px;border-radius:10px">
+                <div class="muted">Projects</div>
+                <div style="font-weight:700;font-size:20px">2</div>
+              </div>
+              <div style="flex:1;min-width:110px;background:var(--glass);padding:12px;border-radius:10px">
+                <div class="muted">Experience (est.)</div>
+                <div style="font-weight:700;font-size:20px">Internships / Academic</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="width:100%" class="section">
+            <strong>Core Tech</strong>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
+              <span class="chip">Python</span>
+              <span class="chip">Pandas</span>
+              <span class="chip">NumPy</span>
+              <span class="chip">Scikit-learn</span>
+              <span class="chip">TensorFlow</span>
+              <span class="chip">Matplotlib</span>
+            </div>
+          </div>
+
+          <div style="width:100%" class="section">
+            <strong>Contact</strong>
+            <p class="muted">For recruitment inquiries, collaboration, or project walkthroughs — email me or connect on LinkedIn.</p>
+            <a class="btn" href="mailto:abhishek.kushwaha.cs@gmail.com">Email — Schedule a Call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card section">
+      <strong>Projects</strong>
+      <div style="margin-top:12px" class="projects">
+        <div class="proj" tabindex="0" data-title="Cricket Score Prediction" data-desc="Processed 72,000+ IPL deliveries. Logistic Regression classifier (87.56% accuracy). Deployed with Streamlit for real-time visualization." data-links='{"live":"https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/","code":"https://github.com/vedprakash8721/Cricket-Score-Predictor"}'>
+          <strong>Cricket Score Prediction</strong>
+          <div class="muted">Python | Scikit-learn | Streamlit</div>
+        </div>
+
+        <div class="proj" tabindex="0" data-title="Stock Trend Forecasting" data-desc="LSTM time-series model trained on 5 years of NIFTY 50 data. Visual dashboards and comparison vs baseline model." data-links='{"code":"https://github.com/vedprakash8721/Stock-Trend-Forecasting"}'>
+          <strong>Stock Trend Forecasting</strong>
+          <div class="muted">Python | TensorFlow | LSTM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card section">
+      <strong>Experience & Achievements</strong>
+      <p class="muted" style="margin-top:8px">Academic projects in ML and data science, hands-on with deployment and visualization. Focused on production-aware model design and explainability.</p>
+    </div>
+
+    <footer class="muted">© Abhishek Kushwaha • Built for hiring managers and technical recruiters — optimized for clarity and action.</footer>
+
+  </div>
+
+  <!-- modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <h3 id="mTitle">Title</h3>
+          <div class="muted" id="mTech">Tech</div>
+        </div>
+        <button class="close" id="mClose">✕</button>
+      </div>
+      <div style="margin-top:12px" id="mDesc"></div>
+      <div style="margin-top:16px;display:flex;gap:8px" id="mLinks"></div>
+    </div>
+  </div>
+
+  <script>
+    // animate skill bars on load
+    window.addEventListener('load',()=>{
+      document.querySelectorAll('.progress i').forEach(el=>{setTimeout(()=>el.style.width = el.getAttribute('data-w'),100)});
+    });
+
+    // project modal
+    document.querySelectorAll('.proj').forEach(el=>{
+      el.addEventListener('click',showProject);
+      el.addEventListener('keypress',(e)=>{if(e.key==='Enter') showProject({currentTarget:el})});
+    });
+    const modal = document.getElementById('modal');
+    const mTitle = document.getElementById('mTitle');
+    const mDesc = document.getElementById('mDesc');
+    const mLinks = document.getElementById('mLinks');
+    const mTech = document.getElementById('mTech');
+    function showProject(e){
+      const el = e.currentTarget || e;
+      mTitle.innerText = el.getAttribute('data-title');
+      mDesc.innerText = el.getAttribute('data-desc');
+      mLinks.innerHTML = '';
+      const links = JSON.parse(el.getAttribute('data-links'));
+      for(const k in links){
+        const a = document.createElement('a');
+        a.href = links[k]; a.target='_blank'; a.className='btn outline'; a.style.marginRight='8px'; a.innerText = k==='live'? 'Live' : 'Code';
+        mLinks.appendChild(a);
+      }
+      mTech.innerText = ''; // optional
+      modal.classList.add('open');
+    }
+    document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('open'));
+    modal.addEventListener('click',(e)=>{if(e.target===modal) modal.classList.remove('open')});
+
+    // theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click',()=>{
+      const el = document.documentElement;
+      const body = document.body;
+      if(body.getAttribute('data-theme')==='light'){body.setAttribute('data-theme','dark');themeToggle.innerText='Toggle Theme'}else{body.setAttribute('data-theme','light');themeToggle.innerText='Toggle Theme'}
+    });
+
+    // download button - expects resume.pdf next to index.html when hosted
+    document.getElementById('downloadBtn').addEventListener('click',()=>{
+      const link = document.createElement('a');
+      link.href = 'resume.pdf'; // place your PDF named "resume.pdf" in same folder before hosting
+      link.download = 'Abhishek-Kushwaha-Resume.pdf';
+      document.body.appendChild(link);link.click();link.remove();
+    });
+
+    // accessible keyboard focus style
+    document.body.addEventListener('keyup',(e)=>{if(e.key==='Tab'){document.documentElement.style.scrollBehavior='smooth'}});
+  </script>
+</body>
+</html>

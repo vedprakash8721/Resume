@@ -3,193 +3,165 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Abhishek Kushwaha — Interactive Résumé</title>
-  <meta name="description" content="Abhishek Kushwaha — B.Tech Computer Science | Machine Learning, Data Science & Generative AI. Interactive résumé / portfolio." />
+  <title>Abhishek Kushwaha — Interactive Portfolio</title>
+  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE | ML, Data Science & Generative AI. Interactive portfolio with projects, live demos and contact." />
   <link rel="icon" href="data:;base64,iVBORw0KGgo="> 
   <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#9aa6b2; --accent:#0ea5a4; --glass: rgba(255,255,255,0.04);
-      --font-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    [data-theme='light']{ --bg:#f7fbff; --card:#ffffff; --muted:#5b6b76; --accent:#0369a1; --glass: rgba(2,6,23,0.04); }
+    :root{--bg:#031018;--card:#071826;--muted:#8fb6bd;--accent:#00e6c3;--accent-2:#00a6d6;--glass:rgba(255,255,255,0.03);--glass-2:rgba(255,255,255,0.02);--glass-3:rgba(0,0,0,0.25);--font-sans:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,var(--bg),#04202a 100%);color:#e6eef6}
-    a{color:var(--accent);text-decoration:none}
-    .container{max-width:980px;margin:28px auto;padding:24px}
-    .top{display:grid;grid-template-columns:1fr 240px;gap:20px;align-items:start}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:22px;border-radius:14px;box-shadow:0 6px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px)}
-    .profile{display:flex;gap:16px;align-items:center}
-    .avatar{width:96px;height:96px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#6ee7b7);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:white}
-    h1{margin:0;font-size:22px}
-    h2{margin:6px 0 14px;font-size:14px;color:var(--muted)}
-    .cta{display:flex;flex-direction:column;gap:10px}
-    .btn{display:inline-flex;gap:10px;align-items:center;padding:10px 14px;border-radius:10px;background:var(--accent);color:#04202a;font-weight:600;border:none;cursor:pointer}
-    .outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .section{margin-top:18px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .skill{margin-bottom:10px}
-    .progress{height:10px;background:rgba(255,255,255,0.06);border-radius:8px;overflow:hidden}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#7dd3fc);width:0;transition:width 900ms cubic-bezier(.2,.8,.2,1)}
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-    .proj{padding:12px;border-radius:10px;background:var(--card);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
-    .muted{color:var(--muted);font-size:13px}
-    footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
-    .skill-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+    html,body{height:100%;margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,#00121a 0%,var(--bg) 100%);color:#d8f7f0}
+    a{color:var(--accent)}
+    .wrap{max-width:1100px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#012b26}
+    nav{display:flex;gap:10px}
+    .nav-link{padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer;border:1px solid transparent}
+    .nav-link.active{color:#012b26;background:linear-gradient(90deg,var(--accent),var(--accent-2));font-weight:700}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;padding:10px 14px;border-radius:10px;color:#012b26;font-weight:700;cursor:pointer}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-top:22px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:22px;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter:blur(6px)}
+    h1{margin:0;font-size:28px}
+    .tagline{color:var(--muted);margin-top:8px}
+    .about{margin-top:12px;color:#bfeee7;line-height:1.5}
+    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{background:var(--glass);padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px}
+    .proj{background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);cursor:pointer;transition:transform .28s ease,box-shadow .28s ease}
+    .proj:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .muted{color:var(--muted);font-size:14px}
+    footer{text-align:center;color:var(--muted);margin-top:24px}
     .meta{display:flex;flex-direction:column;gap:8px}
-    .links{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
-    /* modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(2,6,23,0.6),rgba(2,6,23,0.6));}
+    /* animations */
+    .fade-in{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+    .fade-in.visible{opacity:1;transform:none}
+    /* project modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(2,6,23,0.7),rgba(2,6,23,0.7));z-index:60}
     .modal.open{display:flex}
-    .modal-card{width:720px;max-width:95%;background:var(--card);padding:20px;border-radius:12px}
+    .modal-card{width:820px;max-width:96%;background:var(--card);padding:18px;border-radius:12px}
     .close{background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer}
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:14px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    /* back to top */
+    .bt{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px;border-radius:999px;border:none;color:#012b26;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
     /* responsive */
-    @media (max-width:880px){.top{grid-template-columns:1fr}.cta{flex-direction:row;justify-content:space-between}.avatar{width:72px;height:72px;font-size:20px}}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}}
   </style>
 </head>
-<body data-theme="dark">
-  <div class="container">
-    <div class="top">
-      <div class="card">
-        <div class="profile">
-          <div class="avatar">AK</div>
-          <div style="flex:1">
-            <h1>Abhishek Kushwaha</h1>
-            <h2>B.Tech Computer Science — Machine Learning | Data Science | Generative AI</h2>
-            <div class="muted">Lucknow • +91 95196 69291 • <a href="mailto:abhishek.kushwaha.cs@gmail.com">abhishek.kushwaha.cs@gmail.com</a></div>
-            <div class="links" style="margin-top:10px">
-              <a class="chip" href="https://github.com/vedprakash8721" target="_blank">GitHub</a>
-              <a class="chip" href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/" target="_blank">LinkedIn</a>
-              <a class="chip" href="https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/" target="_blank">Live App</a>
-            </div>
-          </div>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">AK</div>
+        <div>
+          <div style="font-weight:700">Abhishek Kushwaha</div>
+          <div class="muted" style="font-size:13px">B.Tech CSE • ML & Data Science</div>
         </div>
-
-        <div class="section">
-          <strong>Summary</strong>
-          <p class="muted">Analytical and goal-oriented BTech Computer Science student specializing in Machine Learning, Data Science, and Generative AI. Skilled in Python and data visualization with project experience in Cricket Score Prediction and Stock Trend Forecasting. Passionate about developing intelligent AI solutions for real-world impact.</p>
-        </div>
-
-        <div class="section grid-2">
-          <div>
-            <strong>Education</strong>
-            <p class="muted" style="margin-top:8px">B.Tech, Computer Science — Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow <br><small class="muted">Aug 2022 – Mar 2026</small></p>
-
-            <div class="section">
-              <strong>Skills</strong>
-              <div style="margin-top:8px">
-                <div class="skill">
-                  <div class="skill-label"><span>Python</span><span class="muted">Expert</span></div>
-                  <div class="progress"><i data-w="95%"></i></div>
-                </div>
-                <div class="skill">
-                  <div class="skill-label"><span>Machine Learning</span><span class="muted">Advanced</span></div>
-                  <div class="progress"><i data-w="88%"></i></div>
-                </div>
-                <div class="skill">
-                  <div class="skill-label"><span>Data Visualization</span><span class="muted">Advanced</span></div>
-                  <div class="progress"><i data-w="82%"></i></div>
-                </div>
-                <div class="skill">
-                  <div class="skill-label"><span>Time-series / LSTM</span><span class="muted">Intermediate</span></div>
-                  <div class="progress"><i data-w="76%"></i></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <strong>Certifications</strong>
-            <ul class="muted" style="margin-top:8px;margin-left:18px">
-              <li>Python Programming & Data Analysis — Intellipaat (Feb 2025 – Apr 2025)</li>
-              <li>Data Science & Generative AI with Python — PW Skills (June 2025 – Dec 2025)</li>
-            </ul>
-
-            <div class="section">
-              <strong>Contact & Quick Links</strong>
-              <div class="meta" style="margin-top:8px">
-                <div class="muted">Email: <a href="mailto:abhishek.kushwaha.cs@gmail.com">abhishek.kushwaha.cs@gmail.com</a></div>
-                <div class="muted">Phone: +91 95196 69291</div>
-                <div class="muted">GitHub: <a href="https://github.com/vedprakash8721" target="_blank">vedprakash8721</a></div>
-                <div class="muted">LinkedIn: <a href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/" target="_blank">abhishek-kushwaha</a></div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="section">
-          <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
-            <strong>Actions</strong>
-            <div>
-              <button id="downloadBtn" class="btn">Download PDF</button>
-              <button id="themeToggle" class="btn outline" style="margin-left:8px">Toggle Theme</button>
-            </div>
-          </div>
-        </div>
-
       </div>
+      <nav id="nav">
+        <div class="nav-link active" data-route="home">Home</div>
+        <div class="nav-link" data-route="projects">Projects</div>
+        <div class="nav-link" data-route="contact">Contact</div>
+        <a class="btn" id="download" href="resume.pdf" download>Download PDF</a>
+      </nav>
+    </header>
 
-      <div class="card">
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
-          <div style="width:100%;text-align:center">
-            <strong>Quick Stats</strong>
-            <div style="margin-top:14px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap">
-              <div style="flex:1;min-width:110px;background:var(--glass);padding:12px;border-radius:10px">
-                <div class="muted">Projects</div>
-                <div style="font-weight:700;font-size:20px">2</div>
-              </div>
-              <div style="flex:1;min-width:110px;background:var(--glass);padding:12px;border-radius:10px">
-                <div class="muted">Experience (est.)</div>
-                <div style="font-weight:700;font-size:20px">Internships / Academic</div>
-              </div>
-            </div>
+    <!-- Home -->
+    <main id="home" class="page">
+      <section class="hero card fade-in" id="hero">
+        <div>
+          <h1>Hi — I’m Abhishek <span style="color:var(--accent)">Kushwaha</span></h1>
+          <div class="tagline">Turning Data into Decisions</div>
+          <p class="about">Final-year B.Tech Computer Science student focused on building production-aware machine learning models and intuitive data visualizations. I design solutions that bridge algorithms with business outcomes — from predictive analytics to interactive dashboards.</p>
+
+          <div style="margin-top:12px" class="skills">
+            <div class="chip">Python</div>
+            <div class="chip">Machine Learning</div>
+            <div class="chip">Deep Learning (LSTM)</div>
+            <div class="chip">Data Visualization</div>
+            <div class="chip">Model Deployment</div>
           </div>
 
-          <div style="width:100%" class="section">
-            <strong>Core Tech</strong>
-            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px">
-              <span class="chip">Python</span>
-              <span class="chip">Pandas</span>
-              <span class="chip">NumPy</span>
-              <span class="chip">Scikit-learn</span>
-              <span class="chip">TensorFlow</span>
-              <span class="chip">Matplotlib</span>
-            </div>
+          <div style="margin-top:14px;display:flex;gap:10px">
+            <a class="btn" href="#projects" id="viewProjects">View Projects</a>
+            <a class="nav-link" href="mailto:abhishek.kushwaha.cs@gmail.com">Email Me</a>
+          </div>
+        </div>
+
+        <aside style="display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center">
+          <div style="background:linear-gradient(180deg,#002b2b,#003a3f);padding:10px;border-radius:12px;width:100%;text-align:center">
+            <div style="font-size:12px;color:var(--muted)">Quick Stats</div>
+            <div style="font-weight:800;font-size:28px;margin-top:4px">2 Projects</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Internships / Academic Work</div>
           </div>
 
-          <div style="width:100%" class="section">
-            <strong>Contact</strong>
-            <p class="muted">For recruitment inquiries, collaboration, or project walkthroughs — email me or connect on LinkedIn.</p>
-            <a class="btn" href="mailto:abhishek.kushwaha.cs@gmail.com">Email — Schedule a Call</a>
+          <div style="width:100%;background:var(--glass);padding:12px;border-radius:10px;text-align:center">
+            <div class="muted">Core Tech</div>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+              <div class="chip">Pandas</div>
+              <div class="chip">NumPy</div>
+              <div class="chip">TensorFlow</div>
+              <div class="chip">Scikit-learn</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="card fade-in" style="margin-top:16px" id="about">
+        <strong>About me</strong>
+        <p class="muted" style="margin-top:10px">I am a problem-solver who translates data into actionable insights. My focus areas are time-series forecasting, model explainability, and deploying ML models as user-friendly applications. I enjoy mentoring juniors and collaborating on open-source tools.</p>
+      </section>
+    </main>
+
+    <!-- Projects -->
+    <section id="projects" class="page" style="display:none;margin-top:18px">
+      <div class="card fade-in">
+        <strong>Projects</strong>
+        <div class="projects-grid" style="margin-top:12px">
+          <div class="proj" data-title="Cricket Score Prediction" data-desc="Processed 72,000+ IPL deliveries. Logistic Regression classifier with feature engineering and Streamlit deployment. Real-time dashboard for match simulation." data-links='{"live":"https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/","code":"https://github.com/vedprakash8721/Cricket-Score-Predictor"}'>
+            <div style="font-weight:700">Cricket Score Prediction</div>
+            <div class="muted" style="margin-top:6px">Python • Scikit-learn • Streamlit</div>
+          </div>
+
+          <div class="proj" data-title="Stock Trend Forecasting" data-desc="LSTM-based time-series forecasting on NIFTY 50. Built interactive plots and evaluated against ARIMA baselines." data-links='{"code":"https://github.com/vedprakash8721/Stock-Trend-Forecasting"}'>
+            <div style="font-weight:700">Stock Trend Forecasting</div>
+            <div class="muted" style="margin-top:6px">Python • TensorFlow • LSTM</div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="card section">
-      <strong>Projects</strong>
-      <div style="margin-top:12px" class="projects">
-        <div class="proj" tabindex="0" data-title="Cricket Score Prediction" data-desc="Processed 72,000+ IPL deliveries. Logistic Regression classifier (87.56% accuracy). Deployed with Streamlit for real-time visualization." data-links='{"live":"https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/","code":"https://github.com/vedprakash8721/Cricket-Score-Predictor"}'>
-          <strong>Cricket Score Prediction</strong>
-          <div class="muted">Python | Scikit-learn | Streamlit</div>
+    <!-- Contact -->
+    <section id="contact" class="page" style="display:none;margin-top:18px">
+      <div class="card fade-in contact-grid">
+        <div>
+          <strong>Contact</strong>
+          <p class="muted" style="margin-top:10px">For recruitment, collaborations, or project walkthroughs, feel free to reach out directly.</p>
+          <div style="margin-top:10px" class="meta">
+            <div class="muted">Email: <a href="mailto:abhishek.kushwaha.cs@gmail.com">abhishek.kushwaha.cs@gmail.com</a></div>
+            <div class="muted">Phone: +91 95196 69291</div>
+            <div class="muted">LinkedIn: <a href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/" target="_blank">abhishek-kushwaha</a></div>
+            <div class="muted">GitHub: <a href="https://github.com/vedprakash8721" target="_blank">vedprakash8721</a></div>
+          </div>
         </div>
 
-        <div class="proj" tabindex="0" data-title="Stock Trend Forecasting" data-desc="LSTM time-series model trained on 5 years of NIFTY 50 data. Visual dashboards and comparison vs baseline model." data-links='{"code":"https://github.com/vedprakash8721/Stock-Trend-Forecasting"}'>
-          <strong>Stock Trend Forecasting</strong>
-          <div class="muted">Python | TensorFlow | LSTM</div>
-        </div>
+        <aside>
+          <strong>Message me</strong>
+          <form id="contactForm" style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+            <input type="text" id="name" placeholder="Your name" required />
+            <input type="email" id="email" placeholder="Your email" required />
+            <textarea id="message" rows="5" placeholder="Message"></textarea>
+            <button type="submit" class="btn">Send (opens email)</button>
+          </form>
+        </aside>
       </div>
-    </div>
+    </section>
 
-    <div class="card section">
-      <strong>Experience & Achievements</strong>
-      <p class="muted" style="margin-top:8px">Academic projects in ML and data science, hands-on with deployment and visualization. Focused on production-aware model design and explainability.</p>
-    </div>
-
-    <footer class="muted">© Abhishek Kushwaha • Built for hiring managers and technical recruiters — optimized for clarity and action.</footer>
-
+    <footer class="muted">© Abhishek Kushwaha — Built for recruiters and technical hiring managers.</footer>
   </div>
+
+  <button class="bt" id="topBtn" title="Back to top">↑</button>
 
   <!-- modal -->
   <div class="modal" id="modal">
@@ -197,7 +169,7 @@
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
           <h3 id="mTitle">Title</h3>
-          <div class="muted" id="mTech">Tech</div>
+          <div class="muted" id="mTech"></div>
         </div>
         <button class="close" id="mClose">✕</button>
       </div>
@@ -207,56 +179,48 @@
   </div>
 
   <script>
-    // animate skill bars on load
-    window.addEventListener('load',()=>{
-      document.querySelectorAll('.progress i').forEach(el=>{setTimeout(()=>el.style.width = el.getAttribute('data-w'),100)});
-    });
+    // Simple client-side routing (hash-based)
+    const pages = {home:document.getElementById('home'),projects:document.getElementById('projects'),contact:document.getElementById('contact')};
+    const navLinks = document.querySelectorAll('.nav-link');
+    function showRoute(route){
+      for(const k in pages){pages[k].style.display='none';}
+      pages[route].style.display='block';
+      navLinks.forEach(n=>n.classList.remove('active'));
+      document.querySelectorAll('.nav-link[data-route="'+route+'"]')[0]?.classList.add('active');
+      // animate visible sections
+      document.querySelectorAll('.fade-in').forEach(el=>el.classList.remove('visible'));
+      setTimeout(()=>document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible')),80);
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    // initialize
+    document.querySelectorAll('.nav-link[data-route]').forEach(el=>el.addEventListener('click',e=>showRoute(e.currentTarget.getAttribute('data-route'))));
+    document.getElementById('viewProjects').addEventListener('click',()=>showRoute('projects'));
+    // route based on hash
+    const hash = location.hash.replace('#','') || 'home';
+    showRoute(hash);
+    window.addEventListener('hashchange',()=>{const h=location.hash.replace('#','');if(h)showRoute(h)});
 
     // project modal
-    document.querySelectorAll('.proj').forEach(el=>{
-      el.addEventListener('click',showProject);
-      el.addEventListener('keypress',(e)=>{if(e.key==='Enter') showProject({currentTarget:el})});
-    });
-    const modal = document.getElementById('modal');
-    const mTitle = document.getElementById('mTitle');
-    const mDesc = document.getElementById('mDesc');
-    const mLinks = document.getElementById('mLinks');
-    const mTech = document.getElementById('mTech');
-    function showProject(e){
-      const el = e.currentTarget || e;
-      mTitle.innerText = el.getAttribute('data-title');
-      mDesc.innerText = el.getAttribute('data-desc');
-      mLinks.innerHTML = '';
-      const links = JSON.parse(el.getAttribute('data-links'));
-      for(const k in links){
-        const a = document.createElement('a');
-        a.href = links[k]; a.target='_blank'; a.className='btn outline'; a.style.marginRight='8px'; a.innerText = k==='live'? 'Live' : 'Code';
-        mLinks.appendChild(a);
-      }
-      mTech.innerText = ''; // optional
-      modal.classList.add('open');
-    }
+    document.querySelectorAll('.proj').forEach(el=>{el.addEventListener('click',showProject);el.addEventListener('keypress',(e)=>{if(e.key==='Enter')showProject({currentTarget:el})});});
+    const modal = document.getElementById('modal'),mTitle=document.getElementById('mTitle'),mDesc=document.getElementById('mDesc'),mLinks=document.getElementById('mLinks'),mTech=document.getElementById('mTech');
+    function showProject(e){const el=e.currentTarget||e; mTitle.innerText = el.getAttribute('data-title'); mDesc.innerText = el.getAttribute('data-desc'); mLinks.innerHTML=''; const links=JSON.parse(el.getAttribute('data-links')); for(const k in links){const a=document.createElement('a');a.href=links[k];a.target='_blank';a.className='btn';a.style.background='transparent';a.style.border='1px solid rgba(255,255,255,0.06)';a.style.color='var(--muted)';a.style.padding='8px 10px';a.style.borderRadius='8px';a.innerText = k==='live'?'Live':'Code'; mLinks.appendChild(a);} modal.classList.add('open');}
     document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('open'));
-    modal.addEventListener('click',(e)=>{if(e.target===modal) modal.classList.remove('open')});
+    modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
 
-    // theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click',()=>{
-      const el = document.documentElement;
-      const body = document.body;
-      if(body.getAttribute('data-theme')==='light'){body.setAttribute('data-theme','dark');themeToggle.innerText='Toggle Theme'}else{body.setAttribute('data-theme','light');themeToggle.innerText='Toggle Theme'}
-    });
+    // contact form opens mailto
+    document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();const to='abhishek.kushwaha.cs@gmail.com';const subject=encodeURIComponent('Portfolio inquiry from '+document.getElementById('name').value);const body=encodeURIComponent(document.getElementById('message').value+'
 
-    // download button - expects resume.pdf next to index.html when hosted
-    document.getElementById('downloadBtn').addEventListener('click',()=>{
-      const link = document.createElement('a');
-      link.href = 'resume.pdf'; // place your PDF named "resume.pdf" in same folder before hosting
-      link.download = 'Abhishek-Kushwaha-Resume.pdf';
-      document.body.appendChild(link);link.click();link.remove();
-    });
+Contact: '+document.getElementById('email').value);window.location.href=`mailto:${to}?subject=${subject}&body=${body}`});
 
-    // accessible keyboard focus style
-    document.body.addEventListener('keyup',(e)=>{if(e.key==='Tab'){document.documentElement.style.scrollBehavior='smooth'}});
+    // back to top
+    document.getElementById('topBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // page view counter (localStorage fallback)
+    (function(){try{const key='view_count_v1';let n=localStorage.getItem(key);n=n?parseInt(n)+1:1;localStorage.setItem(key,n);console.log('Profile views:',n);}catch(e){console.log('counter err')}})();
+
+    // animate fades on load
+    window.addEventListener('load',()=>{setTimeout(()=>document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible')),120)});
+
   </script>
 </body>
 </html>

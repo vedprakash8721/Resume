@@ -4,49 +4,96 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Abhishek Kushwaha — Interactive Portfolio</title>
-  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE | ML, Data Science & Generative AI. Interactive portfolio with projects, live demos and contact." />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo="> 
+  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE | ML, Data Science & Generative AI. Interactive portfolio with projects, live demos, and contact." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 ry=%2215%22 fill=%22%2300e6c3%22/><text x=%2250%22 y=%2270%22 text-anchor=%22middle%22 font-size=%2270%22 fill=%22%23011b19%22 font-family=%22Arial%22>AK</text></svg>">
+
   <style>
-    :root{--bg:#031018;--card:#071826;--muted:#8fb6bd;--accent:#00e6c3;--accent-2:#00a6d6;--glass:rgba(255,255,255,0.03);--glass-2:rgba(255,255,255,0.02);--glass-3:rgba(0,0,0,0.25);--font-sans:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial}
+    :root{
+      --bg:#031018;
+      --card:#071826;
+      --muted:#8fb6bd;
+      --accent:#00e6c3;
+      --accent-2:#00a6d6;
+      --glass:rgba(255,255,255,0.03);
+      --font-sans:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,#00121a 0%,var(--bg) 100%);color:#d8f7f0}
-    a{color:var(--accent)}
+    html,body{
+      height:100%;margin:0;font-family:var(--font-sans);
+      background:linear-gradient(180deg,#00121a 0%,var(--bg) 100%);
+      color:#d8f7f0;
+      scroll-behavior:smooth;
+    }
+    a{color:var(--accent);text-decoration:none}
     .wrap{max-width:1100px;margin:28px auto;padding:20px}
     header{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#012b26}
+    .logo{
+      width:52px;height:52px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#012b26
+    }
     nav{display:flex;gap:10px}
-    .nav-link{padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer;border:1px solid transparent}
-    .nav-link.active{color:#012b26;background:linear-gradient(90deg,var(--accent),var(--accent-2));font-weight:700}
-    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;padding:10px 14px;border-radius:10px;color:#012b26;font-weight:700;cursor:pointer}
+    .nav-link{
+      padding:8px 12px;border-radius:8px;color:var(--muted);
+      cursor:pointer;border:1px solid transparent;transition:0.3s
+    }
+    .nav-link.active{
+      color:#012b26;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      font-weight:700
+    }
+    .btn{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border:none;padding:10px 14px;border-radius:10px;
+      color:#012b26;font-weight:700;cursor:pointer
+    }
     .hero{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-top:22px}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:22px;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter:blur(6px)}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+      padding:22px;border-radius:14px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter:blur(6px)
+    }
     h1{margin:0;font-size:28px}
     .tagline{color:var(--muted);margin-top:8px}
     .about{margin-top:12px;color:#bfeee7;line-height:1.5}
     .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .chip{background:var(--glass);padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
     .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px}
-    .proj{background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);cursor:pointer;transition:transform .28s ease,box-shadow .28s ease}
+    .proj{
+      background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);
+      padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+      cursor:pointer;transition:transform .28s ease,box-shadow .28s ease
+    }
     .proj:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
     .muted{color:var(--muted);font-size:14px}
     footer{text-align:center;color:var(--muted);margin-top:24px}
     .meta{display:flex;flex-direction:column;gap:8px}
-    /* animations */
     .fade-in{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
     .fade-in.visible{opacity:1;transform:none}
-    /* project modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(2,6,23,0.7),rgba(2,6,23,0.7));z-index:60}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);z-index:60}
     .modal.open{display:flex}
     .modal-card{width:820px;max-width:96%;background:var(--card);padding:18px;border-radius:12px}
     .close{background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer}
-    /* contact */
     .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:14px}
-    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-    /* back to top */
-    .bt{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px;border-radius:999px;border:none;color:#012b26;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-    /* responsive */
-    @media (max-width:900px){.hero{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}}
+    input,textarea{
+      width:100%;padding:10px;border-radius:8px;
+      border:1px solid rgba(255,255,255,0.04);
+      background:transparent;color:inherit
+    }
+    .bt{
+      position:fixed;right:18px;bottom:18px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      padding:12px;border-radius:999px;border:none;
+      color:#012b26;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.6)
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -163,7 +210,7 @@
 
   <button class="bt" id="topBtn" title="Back to top">↑</button>
 
-  <!-- modal -->
+  <!-- Modal -->
   <div class="modal" id="modal">
     <div class="modal-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
@@ -179,48 +226,80 @@
   </div>
 
   <script>
-    // Simple client-side routing (hash-based)
-    const pages = {home:document.getElementById('home'),projects:document.getElementById('projects'),contact:document.getElementById('contact')};
+    const pages = {
+      home: document.getElementById('home'),
+      projects: document.getElementById('projects'),
+      contact: document.getElementById('contact')
+    };
     const navLinks = document.querySelectorAll('.nav-link');
-    function showRoute(route){
-      for(const k in pages){pages[k].style.display='none';}
-      pages[route].style.display='block';
-      navLinks.forEach(n=>n.classList.remove('active'));
-      document.querySelectorAll('.nav-link[data-route="'+route+'"]')[0]?.classList.add('active');
-      // animate visible sections
-      document.querySelectorAll('.fade-in').forEach(el=>el.classList.remove('visible'));
-      setTimeout(()=>document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible')),80);
-      window.scrollTo({top:0,behavior:'smooth'});
+
+    function showRoute(route) {
+      for (const k in pages) pages[k].style.display = 'none';
+      pages[route].style.display = 'block';
+      navLinks.forEach(n => n.classList.remove('active'));
+      document.querySelector(`.nav-link[data-route="${route}"]`)?.classList.add('active');
+      document.querySelectorAll('.fade-in').forEach(el => el.classList.remove('visible'));
+      setTimeout(() => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')), 80);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    // initialize
-    document.querySelectorAll('.nav-link[data-route]').forEach(el=>el.addEventListener('click',e=>showRoute(e.currentTarget.getAttribute('data-route'))));
-    document.getElementById('viewProjects').addEventListener('click',()=>showRoute('projects'));
-    // route based on hash
-    const hash = location.hash.replace('#','') || 'home';
-    showRoute(hash);
-    window.addEventListener('hashchange',()=>{const h=location.hash.replace('#','');if(h)showRoute(h)});
 
-    // project modal
-    document.querySelectorAll('.proj').forEach(el=>{el.addEventListener('click',showProject);el.addEventListener('keypress',(e)=>{if(e.key==='Enter')showProject({currentTarget:el})});});
-    const modal = document.getElementById('modal'),mTitle=document.getElementById('mTitle'),mDesc=document.getElementById('mDesc'),mLinks=document.getElementById('mLinks'),mTech=document.getElementById('mTech');
-    function showProject(e){const el=e.currentTarget||e; mTitle.innerText = el.getAttribute('data-title'); mDesc.innerText = el.getAttribute('data-desc'); mLinks.innerHTML=''; const links=JSON.parse(el.getAttribute('data-links')); for(const k in links){const a=document.createElement('a');a.href=links[k];a.target='_blank';a.className='btn';a.style.background='transparent';a.style.border='1px solid rgba(255,255,255,0.06)';a.style.color='var(--muted)';a.style.padding='8px 10px';a.style.borderRadius='8px';a.innerText = k==='live'?'Live':'Code'; mLinks.appendChild(a);} modal.classList.add('open');}
-    document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('open'));
-    modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
+    document.querySelectorAll('.nav-link[data-route]')
+      .forEach(el => el.addEventListener('click', e => showRoute(e.currentTarget.getAttribute('data-route'))));
+    document.getElementById('viewProjects').addEventListener('click', () => showRoute('projects'));
 
-    // contact form opens mailto
-    document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();const to='abhishek.kushwaha.cs@gmail.com';const subject=encodeURIComponent('Portfolio inquiry from '+document.getElementById('name').value);const body=encodeURIComponent(document.getElementById('message').value+'
+    // Ensure home shows on load
+    const hash = location.hash.replace('#', '') || 'home';
+    window.addEventListener('DOMContentLoaded', () => showRoute(hash));
+    window.addEventListener('hashchange', () => {
+      const h = location.hash.replace('#', '');
+      if (h) showRoute(h);
+    });
 
-Contact: '+document.getElementById('email').value);window.location.href=`mailto:${to}?subject=${subject}&body=${body}`});
+    // Project modal
+    const modal = document.getElementById('modal'),
+      mTitle = document.getElementById('mTitle'),
+      mDesc = document.getElementById('mDesc'),
+      mLinks = document.getElementById('mLinks');
 
-    // back to top
-    document.getElementById('topBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    function showProject(e) {
+      const el = e.currentTarget;
+      mTitle.innerText = el.getAttribute('data-title');
+      mDesc.innerText = el.getAttribute('data-desc');
+      mLinks.innerHTML = '';
+      const links = JSON.parse(el.getAttribute('data-links'));
+      for (const k in links) {
+        const a = document.createElement('a');
+        a.href = links[k];
+        a.target = '_blank';
+        a.className = 'btn';
+        a.style.background = 'transparent';
+        a.style.border = '1px solid rgba(255,255,255,0.06)';
+        a.style.color = 'var(--muted)';
+        a.innerText = k === 'live' ? 'Live' : 'Code';
+        mLinks.appendChild(a);
+      }
+      modal.classList.add('open');
+    }
 
-    // page view counter (localStorage fallback)
-    (function(){try{const key='view_count_v1';let n=localStorage.getItem(key);n=n?parseInt(n)+1:1;localStorage.setItem(key,n);console.log('Profile views:',n);}catch(e){console.log('counter err')}})();
+    document.querySelectorAll('.proj').forEach(el => {
+      el.addEventListener('click', showProject);
+      el.addEventListener('keypress', e => { if (e.key === 'Enter') showProject({ currentTarget: el }); });
+    });
+    document.getElementById('mClose').addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
 
-    // animate fades on load
-    window.addEventListener('load',()=>{setTimeout(()=>document.querySelectorAll('.fade-in').forEach(el=>el.classList.add('visible')),120)});
+    // Contact form
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const n = document.getElementById('name').value.trim(),
+        em = document.getElementById('email').value.trim(),
+        msg = document.getElementById('message').value.trim();
+      const mail = `mailto:abhishek.kushwaha.cs@gmail.com?subject=Contact from ${encodeURIComponent(n)}&body=${encodeURIComponent(msg)}%0A%0AFrom:%20${em}`;
+      window.location.href = mail;
+    });
 
+    // Back to top
+    document.getElementById('topBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
 </body>
 </html>

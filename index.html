@@ -3,557 +3,336 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Abhishek Kushwaha — Dynamic Portfolio</title>
-  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE | ML, Data Science & Generative AI. Dynamic portfolio with projects, experience, and contact." />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2215%22 ry=%2215%22 fill=%22%2300e6c3%22/><text x=%2250%22 y=%2270%22 text-anchor=%22middle%22 font-size=%2270%22 fill=%22%011b19%22 font-family=%22Arial%22>AK</text></svg>">
-  
+  <title>Abhishek Kushwaha — Dynamic Slide Portfolio</title>
+  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE (AKTU) | Data Science & Generative AI. Aesthetic full‑screen slider portfolio with rich animations, projects, skills, education, and contact." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2718%27 ry=%2718%27 fill=%27%2300e6c3%27/><text x=%2750%27 y=%2770%27 text-anchor=%27middle%27 font-size=%2770%27 fill=%27%23011b19%27 font-family=%27Arial%27>AK</text></svg>">
+
+  <!-- Swiper (full-page slides) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <!-- GSAP for micro-motion -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- tsParticles for subtle background -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
   <style>
     :root{
-      --bg:#031018;
-      --card:#071826;
-      --muted:#8fb6bd;
-      --accent:#00e6c3;
-      --accent-2:#00a6d6;
-      --glass:rgba(255,255,255,0.03);
-      --font-sans:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      /* Default THEME: Royal Blue–Cyan (corporate modern) */
+      --bg-1:#07111d; /* deep navy */
+      --bg-2:#0a1726; /* night blue */
+      --grad-1:#3a7bd5; /* royal blue */
+      --grad-2:#00d2ff; /* cyan */
+      --grad-3:#8aa4ff; /* soft iris */
+      --glass:rgba(255,255,255,0.10);
+      --text:#eaf4ff;
+      --muted:#adc4da;
+      --chip:#0b1d32;
+      --ok:#00d2ff; --accent:#3a7bd5;
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:18px;
+      --font:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;
     }
+    /* Optional alternate themes kept for future A/B testing */
+    :root.theme-emerald { --bg-1:#0b1412; --bg-2:#0e1b17; --grad-1:#2bd4a5; --grad-2:#ffd166; --grad-3:#8be8c8; --glass:rgba(255,255,255,0.10); --text:#eafaf4; --muted:#bfe1d4; --chip:#0f251f; --accent:#2bd4a5; }
+    :root.theme-slate   { --bg-1:#0a0a0f; --bg-2:#101118; --grad-1:#9aa4b2; --grad-2:#e2e8f0; --grad-3:#60a5fa; --glass:rgba(255,255,255,0.12); --text:#edf2f7; --muted:#b3bdcc; --chip:#131722; --accent:#60a5fa; }
+
     *{box-sizing:border-box}
-    html,body{
-      height:100%;margin:0;font-family:var(--font-sans);
-      background:linear-gradient(180deg,#00121a 0%,var(--bg) 100%);
-      color:#d8f7f0;
-      scroll-behavior:smooth;
-    }
-    
-    /* tsParticles STYLES */
-    #tsparticles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0; /* Sit behind the content */
-    }
+    html,body{height:100%;margin:0;font-family:var(--font);color:var(--text);background:radial-gradient(1000px 600px at 10% 10%, #0b1830, #07111d 50%),linear-gradient(180deg,var(--bg-1),var(--bg-2));}
 
-    a{color:var(--accent);text-decoration:none}
-    
-    .wrap{
-      max-width:1100px;margin:28px auto;padding:20px;
-      position: relative; /* Needed so content stays above particles */
-      z-index: 2;
-    }
-    header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      position:sticky; top: 12px; z-index: 100;
-      background: rgba(3, 16, 24, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 12px 20px;
-      border-radius: 12px;
-      border: 1px solid var(--glass);
-    }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:52px;height:52px;border-radius:10px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;
-      font-weight:800;color:#012b26
-    }
-    nav{display:flex;gap:10px; align-items: center;}
-    .nav-link{
-      padding:8px 12px;border-radius:8px;color:var(--muted);
-      cursor:pointer;border:1px solid transparent;transition:0.3s
-    }
-    .nav-link.active{
-      color:#012b26;background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      font-weight:700
-    }
-    .btn{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      border:none;padding:10px 14px;border-radius:10px;
-      color:#012b26;font-weight:700;cursor:pointer;
-      transition: transform 0.3s;
-    }
-    .btn:hover { transform: scale(1.05); }
-    
-    .page-section {
-        margin-top: 60px;
-    }
+    /* fixed nav */
+    .topbar{position:fixed;z-index:60;left:50%;transform:translateX(-50%);top:14px;background:linear-gradient(135deg,rgba(58,123,213,.22),rgba(0,210,255,.18));border:1px solid var(--glass);backdrop-filter:blur(12px);box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px}
+    .topbar a{color:var(--text);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:999px}
+    .topbar a.active{background:linear-gradient(90deg,var(--grad-1),var(--grad-2));color:#061422;font-weight:700}
+    .btn{background:linear-gradient(90deg,var(--grad-2),var(--grad-1));border:none;color:#061422;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
 
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:22px; margin-top: 20px;}
-    .card{
-      background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
-      padding:22px;border-radius:14px;
-      box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter:blur(6px);
-      border: 1px solid var(--glass);
-    }
-    h1{margin:0;font-size:28px}
-    h2 { font-size: 24px; color: var(--accent); border-bottom: 2px solid var(--accent-2); padding-bottom: 8px; margin-bottom: 20px;}
-    h3 { font-size: 18px; color: var(--accent-2); margin-bottom: 10px; }
-    
-    /* TYPING ANIMATION CURSOR CSS */
-    .typing-text {
-      border-right: 2px solid var(--accent);
-      animation: blink 1s step-end infinite;
-      white-space: nowrap;
-    }
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: var(--accent); }
-    }
-    
-    .tagline{color:var(--muted);margin-top:8px}
-    .about{margin-top:12px;color:#bfeee7;line-height:1.5}
-    .skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .chip{background:var(--glass);padding:8px 10px;border-radius:999px;font-size:13px;color:var(--muted); border: 1px solid rgba(255,255,255,0.05);}
-    
-    /* --- NEW --- Skill Grid for new section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .skills-grid ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    .skills-grid li {
-      color: var(--muted);
-      margin-bottom: 8px;
-      padding-left: 20px;
-      position: relative;
-    }
-    .skills-grid li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
+    /* full page slides */
+    .swiper{width:100%;height:100vh}
+    .swiper-slide{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 
-    .projects-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:14px}
-    .proj-card {
-      background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);
-      padding: 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);
-      transition:transform .28s ease,box-shadow .28s ease
-    }
-    .proj-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
-    .proj-title { font-weight: 700; font-size: 20px; color: var(--accent); }
-    .proj-desc { color: var(--muted); margin-top: 10px; line-height: 1.6; }
-    .proj-links { display: flex; gap: 10px; margin-top: 14px; }
-    .proj-link {
-        background: transparent; border: 1px solid var(--accent-2);
-        color: var(--accent-2); padding: 8px 12px; border-radius: 8px;
-        font-weight: 600;
-    }
-    .proj-link:hover { background: var(--accent-2); color: #012b26; }
-    
-    .timeline { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-    .timeline-item {
-        padding: 16px; background: var(--glass); border-radius: 10px;
-        border-left: 4px solid var(--accent);
-    }
-    .timeline-title { font-weight: 700; font-size: 18px; }
-    .timeline-subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
-    .timeline-desc { margin-top: 8px; color: #bfeee7; line-height: 1.6; } /* Added line-height */
-    
-    .muted{color:var(--muted);font-size:14px}
-    footer{text-align:center;color:var(--muted);margin-top:24px}
-    .meta{display:flex;flex-direction:column;gap:8px}
+    /* floating background blob */
+    .blob{position:absolute;inset:auto;width:60vmax;height:60vmax;background:radial-gradient(circle at 30% 30%,rgba(58,123,213,.30),transparent 60%),radial-gradient(circle at 70% 70%,rgba(0,210,255,.22),transparent 60%);filter:blur(40px);opacity:.55;z-index:0;animation:float 16s ease-in-out infinite alternate}
+    @keyframes float{to{transform:translateY(-30px) translateX(20px)}}
 
-    /* Main fade-in class for sections */
-    .fade-in{
-      opacity:0;
-      transform:translateY(20px);
-      transition:opacity .6s ease-out,transform .6s ease-out;
-    }
-    .fade-in.visible{opacity:1;transform:none}
+    /* card container */
+    .panel{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.04));border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}
+    .title{font-size:34px;margin:0}
+    .tag{color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .chip{background:linear-gradient(180deg,#0d2039,#0a192e);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:999px;font-size:13px;color:#d8ecff}
 
-    /* Staggered Chip Animation */
-    .chip-fade-in {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    .card.visible .chip-fade-in {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .card.visible .chip-fade-in:nth-child(1) { transition-delay: 0.3s; }
-    .card.visible .chip-fade-in:nth-child(2) { transition-delay: 0.4s; }
-    .card.visible .chip-fade-in:nth-child(3) { transition-delay: 0.5s; }
-    .card.visible .chip-fade-in:nth-child(4) { transition-delay: 0.6s; }
-    .card.visible .chip-fade-in:nth-child(5) { transition-delay: 0.7s; }
+    .dp{width:100%;border-radius:16px;object-fit:cover;border:3px solid rgba(0,210,255,.7);box-shadow:0 14px 40px rgba(0,210,255,.18)}
 
-    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    input,textarea{
-      width:100%;padding:10px;border-radius:8px;
-      border:1px solid rgba(255,255,255,0.04);
-      background:transparent;color:inherit; margin-top: 8px;
-    }
-    .bt{
-      position:fixed;right:18px;bottom:18px; z-index: 50;
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      padding:12px;border-radius:999px;border:none;
-      color:#012b26;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.6);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .bt.visible { opacity: 1; }
+    /* mini metrics */
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .metric{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:12px;border-radius:12px;text-align:center}
+    .metric b{font-size:22px}
 
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
-      header { flex-direction: column; gap: 15px; position: static; }
-      h1 { font-size: 24px; }
-      .skills-grid { grid-template-columns: 1fr; } /* Stack skills on mobile */
-    }
+    /* section blocks */
+    .block{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:16px;border-radius:14px}
+    h3{margin:0 0 8px 0;color:#d6e8ff}
+    .muted{color:var(--muted)}
+
+    /* progress bars for skills */
+    .bar{height:10px;background:#0d223d;border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.10)}
+    .bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--grad-2),var(--grad-1));width:0}
+
+    /* project card */
+    .proj{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:16px;border-radius:14px}
+    .proj h4{margin:0;color:#b8e3ff}
+
+    /* contact */
+    .contact{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(5,14,26,.6);color:#eaf4ff}
+
+    /* pagination bullets customization */
+    .swiper-pagination-bullet{background:rgba(255,255,255,.5);opacity:.8}
+    .swiper-pagination-bullet-active{background:linear-gradient(90deg,var(--grad-2),var(--grad-1))}
+
+    @media (max-width:1000px){.grid{grid-template-columns:1fr}.contact{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+  <!-- top nav shortcuts (highlight updates as slides change) -->
+  <nav class="topbar" id="topbar">
+    <a href="#" data-go="0" class="active">Home</a>
+    <a href="#" data-go="1">Skills</a>
+    <a href="#" data-go="2">Projects</a>
+    <a href="#" data-go="3">Experience</a>
+    <a href="#" data-go="4">Education</a>
+    <a href="#" data-go="5">Contact</a>
+    <a class="btn" href="resume.pdf" download>Download CV</a>
+  </nav>
 
+  <!-- subtle particles -->
   <div id="tsparticles"></div>
 
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div>
-          <div style="font-weight:700">Abhishek Kushwaha</div>
-          <div class="muted" style="font-size:13px">B.Tech CSE • ML & Data Science</div>
-        </div>
-      </div>
-      <nav id="nav">
-        <a class="nav-link" href="#home" data-route="home">Home</a>
-        <a class="nav-link" href="#skills" data-route="skills">Skills</a>
-        <a class="nav-link" href="#experience" data-route="experience">Experience</a>
-        <a class="nav-link" href="#projects" data-route="projects">Projects</a>
-        <a class="nav-link" href="#contact" data-route="contact">Contact</a>
-        <a class="btn" id="download" href="resume.pdf" download>Download PDF</a>
-      </nav>
-    </header>
+  <!-- FULLSCREEN SLIDER -->
+  <div class="swiper" id="fullpage">
+    <div class="swiper-wrapper">
 
-    <main>
-      <section id="home" class="page-section">
-        <div class="hero card fade-in">
+      <!-- Slide 1: Hero -->
+      <section class="swiper-slide">
+        <div class="blob"></div>
+        <div class="panel grid">
           <div>
-            <h1>Hi — I’m 
-              <span class="typing-text" style="color:var(--accent)"></span>
-            </h1>
-            <div class="tagline">Turning Data into Decisions</div>
-            <p class="about">Final-year B.Tech Computer Science student focused on building production-aware machine learning models and intuitive data visualizations. I design solutions that bridge algorithms with business outcomes — from predictive analytics to interactive dashboards.</p>
-            <div style="margin-top:12px" class="skills">
-              <div class="chip chip-fade-in">Python</div>
-              <div class="chip chip-fade-in">Machine Learning</div>
-              <div class="chip chip-fade-in">Deep Learning (LSTM)</div>
-              <div class="chip chip-fade-in">Data Visualization</div>
-              <div class="chip chip-fade-in">Model Deployment</div>
+            <h1 class="title">Hi — I’m <span style="background:linear-gradient(90deg,var(--grad-2),var(--grad-1));-webkit-background-clip:text;background-clip:text;color:transparent">Abhishek Kushwaha</span></h1>
+            <div class="tag">Turning Data into Decisions • Final‑year B.Tech CSE</div>
+            <p class="muted" style="margin-top:10px">I build production‑aware ML models and intuitive visualizations that translate data into business outcomes. Focus areas: time‑series forecasting (LSTM), explainability, and deployable apps (Streamlit).</p>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Scikit‑learn</span><span class="chip">TensorFlow</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">SQL</span>
             </div>
-            <div style="margin-top:14px;display:flex;gap:10px">
-              <a class="btn" href="#projects">View Projects</a>
-              <a class="nav-link" style="border: 1px solid var(--glass)" href="mailto:abhishek.kushwaha.cs@gmail.com">Email Me</a>
+            <div class="metrics">
+              <div class="metric"><b>2</b><div class="muted">Key Projects</div></div>
+              <div class="metric"><b>2026</b><div class="muted">Graduating (AKTU)</div></div>
+              <div class="metric"><b>8.0</b><div class="muted">Current CGPA</div></div>
             </div>
-          </div>
-          <aside style="display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center">
-            <div style="background:linear-gradient(180deg,#002b2b,#003a3f);padding:10px;border-radius:12px;width:100%;text-align:center">
-              <div style="font-size:12px;color:var(--muted)">Quick Stats</div>
-              <div style="font-weight:800;font-size:28px;margin-top:4px">2 Projects</div>
-              <div style="color:var(--muted);font-size:13px;margin-top:6px">Internships / Academic Work</div>
-            </div>
-            <div style="width:100%;background:var(--glass);padding:12px;border-radius:10px;text-align:center">
-              <div class="muted">Core Tech</div>
-              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
-                <div class="chip">Pandas</div>
-                <div class="chip">NumPy</div>
-                <div class="chip">TensorFlow</div>
-                <div class="chip">Scikit-learn</div>
-                <div class="chip">Seaborn</div>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        <div class="card fade-in" style="margin-top:16px" id="about">
-          <strong>About me</strong>
-          <p class="muted" style="margin-top:10px">I am a problem-solver who translates data into actionable insights. My focus areas are time-series forecasting, model explainability, and deploying ML models as user-friendly applications. I enjoy mentoring juniors and collaborating on open-source tools.</p>
-          <p class="muted" style="margin-top:10px">My journey in data science is driven by a curiosity to uncover the stories hidden within data. I'm particularly interested in time-series analysis (like my stock forecasting project) and building interactive tools (like the IPL predictor) that make complex data accessible and useful to everyone.</p>
-        </div>
-      </section>
-
-      <section id="skills" class="page-section card fade-in">
-        <h2>My Core Skills</h2>
-        <div class="skills-grid">
-          <div>
-            <h3>Analysis & Machine Learning</h3>
-            <ul>
-              <li>Python (Pandas, NumPy)</li>
-              <li>Scikit-learn</li>
-              <li>TensorFlow (Keras)</li>
-              <li>Regression & Classification</li>
-              <li>Time-Series Forecasting (LSTM)</li>
-              <li>Statistical Analysis</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Visualization & Deployment</h3>
-            <ul>
-              <li>Seaborn & Matplotlib</li>
-              <li>Streamlit (Interactive Dashboards)</li>
-              <li>Plotly (Basic)</li>
-              <li>Model Deployment (Basic)</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Databases & Tools</h3>
-            <ul>
-              <li>SQL (Data Extraction)</li>
-              <li>Git & GitHub</li>
-              <li>VS Code</li>
-              <li>Jupyter Notebooks</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" class="page-section card fade-in">
-        <h2>Experience</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-title">Data Science Trainee</div>
-            <div class="timeline-subtitle">PWskills (PhysicsWallah) | (June 2025 – Nov 2025)</div>
-            <p class="timeline-desc">
-              • Completed an intensive 6-month data science program focused on practical, end-to-end project development.
-              <br>• Mastered data manipulation and analysis with <strong>Pandas</strong> and <strong>NumPy</strong>, and learned to write complex <strong>SQL</strong> queries for data extraction.
-              <br>• Built, trained, and evaluated a variety of machine learning models (like Regression and Classification) using <strong>Scikit-learn</strong> on real-world datasets.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" class="page-section card fade-in">
-        <h2>Projects</h2>
-        <div class="projects-grid">
-          <div class="proj-card fade-in">
-            <div class="proj-title">Cricket Score Prediction</div>
-            <div class="skills" style="margin-top: 8px;">
-              <div class="chip">Python</div>
-              <div class="chip">Scikit-learn</div>
-              <div class="chip">Streamlit</div>
-              <div class="chip">Logistic Regression</div>
-            </div>
-            <p class="proj-desc">
-              Processed 72,000+ IPL deliveries to build a match win predictor. Used Logistic Regression with feature engineering and deployed it as a real-time dashboard for match simulation using Streamlit.
-              <br><br>
-              <strong>This project involved heavy data cleaning and feature engineering to determine the most impactful factors on a match's outcome.</strong>
-            </p>
-            <div class="proj-links">
-              <a href="https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/" target="_blank" class="proj-link">Live Demo</a>
-              <a href="https://github.com/vedprakash8721/Cricket-Score-Predictor" target="_blank" class="proj-link">View Code</a>
-            </div>
-          </div>
-          <div class="proj-card fade-in">
-            <div class="proj-title">Stock Trend Forecasting</div>
-            <div class="skills" style="margin-top: 8px;">
-              <div class="chip">Python</div>
-              <div class="chip">TensorFlow</div>
-              <div class="chip">LSTM</div>
-              <div class="chip">Time Series</div>
-            </div>
-            <p class="proj-desc">
-              Developed an LSTM-based time-series forecasting model to predict NIFTY 50 stock trends. Built interactive plots to visualize predictions and evaluated model performance against ARIMA baselines.
-              <br><br>
-              <strong>This model utilizes LSTM networks to effectively capture long-term dependencies in time-series data, which is crucial for financial forecasting.</strong>
-            </p>
-            <div class="proj-links">
-              <a href="https://github.com/vedprakash8721/Stock-Trend-Forecasting" target="_blank" class="proj-link">View Code</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-       <section id="education" class="page-section card fade-in">
-        <h2>Education</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-title">B.Tech, Computer Science & Engineering</div>
-            <div class="timeline-subtitle">Bansal Institute of Engineering and Technology (AKTU), Lucknow | (2022 – 2026)</div>
-            <p class="timeline-desc">
-              • Specialization: Machine Learning & Data Science
-              <br>• Current CGPA: 8.0
-              <br><br> <strong>Key Coursework:</strong>
-              <br>• Data Structures & Algorithms
-              <br>• Database Management Systems (DBMS)
-              <br>• Deep Learning
-              <br>• Predictive Analytics
-              <br>• Object-Oriented Programming
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="page-section card fade-in">
-        <h2>Contact</h2>
-        <div class="contact-grid">
-          <div>
-            <p class="muted" style="margin-top:10px">For recruitment, collaborations, or project walkthroughs, feel free to reach out directly.</p>
-            <div style="margin-top:10px" class="meta">
-              <div class="muted">Email: <a href="mailto:abhishek.kushwaha.cs@gmail.com">abhishek.kushwaha.cs@gmail.com</a></div>
-              <div class="muted">Phone: +91 95196 69291</div>
-              <div class="muted">LinkedIn: <a href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/" target="_blank">abhishek-kushwaha</a></div>
-              <div class="muted">GitHub: <a href="https://github.com/vedprakash8721" target="_blank">vedprakash8721</a></div>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn" href="#" id="gotoProjects">Explore Projects</a>
+              <a class="btn" href="mailto:abhishek.kushwaha.cs@gmail.com" style="background:linear-gradient(90deg,var(--grad-3),var(--grad-2))">Hire Me</a>
             </div>
           </div>
           <aside>
-            <strong>Message me</strong>
-            <form id="contactForm" style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
-              <input type="text" id="name" placeholder="Your name" required />
-              <input type="email" id="email" placeholder="Your email" required />
-              <textarea id="message" rows="5" placeholder="Message"></textarea>
-              <button type="submit" class="btn">Send (opens email)</button>
-            </form>
+            <img src="DP.jpg" alt="Abhishek DP" class="dp" />
+            <div class="block" style="margin-top:14px">
+              <h3>Core Tech</h3>
+              <div class="chips" style="margin-top:8px"><span class="chip">Streamlit</span><span class="chip">Model Deployment</span><span class="chip">Data Viz</span></div>
+            </div>
           </aside>
         </div>
       </section>
 
-      <footer class="muted">© Abhishek Kushwaha — Built for recruiters and technical hiring managers.</footer>
+      <!-- Slide 2: Skills (progress bars + bullets) -->
+      <section class="swiper-slide">
+        <div class="blob" style="animation-duration:18s"></div>
+        <div class="panel">
+          <h2 class="title" style="font-size:28px">Skills & Proficiency</h2>
+          <p class="muted">A balanced stack across analysis, modeling, visualization, and deployment. Bars reflect practical confidence from projects and coursework.</p>
+          <div class="grid" style="margin-top:10px">
+            <div>
+              <div class="block" style="margin-bottom:12px">
+                <h3>Python (Pandas, NumPy)</h3>
+                <div class="bar"><span style="width:95%"></span></div>
+              </div>
+              <div class="block" style="margin-bottom:12px">
+                <h3>Machine Learning (Scikit‑learn)</h3>
+                <div class="bar"><span style="width:88%"></span></div>
+              </div>
+              <div class="block" style="margin-bottom:12px">
+                <h3>Deep Learning (TensorFlow, LSTM)</h3>
+                <div class="bar"><span style="width:82%"></span></div>
+              </div>
+            </div>
+            <div>
+              <div class="block" style="margin-bottom:12px">
+                <h3>Data Visualization (Matplotlib, Seaborn)</h3>
+                <div class="bar"><span style="width:86%"></span></div>
+              </div>
+              <div class="block" style="margin-bottom:12px">
+                <h3>Model Deployment (Streamlit)</h3>
+                <div class="bar"><span style="width:80%"></span></div>
+              </div>
+              <div class="block" style="margin-bottom:12px">
+                <h3>SQL & Reporting</h3>
+                <div class="bar"><span style="width:78%"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Projects (two rich cards) -->
+      <section class="swiper-slide">
+        <div class="blob" style="animation-duration:20s"></div>
+        <div class="panel">
+          <h2 class="title" style="font-size:28px">Projects</h2>
+          <div class="grid">
+            <div class="proj">
+              <h4>Cricket Score Prediction</h4>
+              <div class="chips" style="margin:8px 0"><span class="chip">Python</span><span class="chip">Scikit‑learn</span><span class="chip">Streamlit</span><span class="chip">Logistic Regression</span></div>
+              <p class="muted">Processed 72,000+ IPL deliveries with contextual features (over, wickets in hand, run rate). Built a real‑time Streamlit dashboard to simulate outcomes and explain predictions.</p>
+              <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+                <a class="btn" target="_blank" href="https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/">Live Demo</a>
+                <a class="btn" target="_blank" href="https://github.com/vedprakash8721/Cricket-Score-Predictor" style="background:linear-gradient(90deg,var(--grad-3),var(--grad-2))">Code</a>
+              </div>
+            </div>
+            <div class="proj">
+              <h4>Stock Trend Forecasting</h4>
+              <div class="chips" style="margin:8px 0"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">LSTM</span><span class="chip">Time Series</span></div>
+              <p class="muted">Sequence modeling for NIFTY 50 with walk‑forward validation; compared against ARIMA baselines. Delivered interpretable plots and clean notebooks for reproducibility.</p>
+              <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+                <a class="btn" target="_blank" href="https://github.com/vedprakash8721/Stock-Trend-Forecasting">Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Experience -->
+      <section class="swiper-slide">
+        <div class="blob" style="animation-duration:22s"></div>
+        <div class="panel">
+          <h2 class="title" style="font-size:28px">Experience</h2>
+          <div class="grid">
+            <div class="block">
+              <h3>Data Science Trainee — PW Skills</h3>
+              <p class="muted" style="margin:6px 0">June 2025 – Nov 2025</p>
+              <ul class="muted" style="margin:0 0 0 18px;line-height:1.6">
+                <li>Hands‑on pipeline building: data wrangling (Pandas/NumPy), supervised learning (Scikit‑learn).</li>
+                <li>Visualization practice with Matplotlib/Seaborn; mini‑apps via Streamlit.</li>
+                <li>Project orientation: reproducible notebooks, metrics, storytelling dashboards.</li>
+              </ul>
+            </div>
+            <div class="block">
+              <h3>What I’m exploring next</h3>
+              <ul class="muted" style="margin:0 0 0 18px;line-height:1.6">
+                <li>Model explainability for decision support (SHAP/feature attributions).</li>
+                <li>Lightweight deployments and API wrappers for ML inference.</li>
+                <li>Better time‑series cross‑validation strategies.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Education -->
+      <section class="swiper-slide">
+        <div class="blob" style="animation-duration:24s"></div>
+        <div class="panel">
+          <h2 class="title" style="font-size:28px">Education</h2>
+          <div class="block">
+            <h3>B.Tech — Computer Science & Engineering</h3>
+            <p class="muted" style="margin:6px 0">Bansal Institute of Engineering & Technology (AKTU), Lucknow • <b>2022–2026</b></p>
+            <p class="muted">Current CGPA: <b>8.0</b>. Focus: Machine Learning & Data Science. Core coursework includes Data Structures, DBMS, Deep Learning, Predictive Analytics, and OOP.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: Contact -->
+      <section class="swiper-slide">
+        <div class="blob" style="animation-duration:26s"></div>
+        <div class="panel">
+          <h2 class="title" style="font-size:28px">Let’s Connect</h2>
+          <div class="contact">
+            <div>
+              <p class="muted">Open to internships, collaborations, and walkthroughs of the projects above.</p>
+              <div class="chips" style="margin-top:8px">
+                <a class="chip" href="mailto:abhishek.kushwaha.cs@gmail.com">Email</a>
+                <a class="chip" target="_blank" href="https://www.linkedin.com/in/abhishek-kushwaha-89893035b/">LinkedIn</a>
+                <a class="chip" target="_blank" href="https://github.com/vedprakash8721">GitHub</a>
+              </div>
+            </div>
+            <aside>
+              <form id="contactForm" style="display:flex;flex-direction:column;gap:10px">
+                <input id="name" type="text" placeholder="Your name" required />
+                <input id="email" type="email" placeholder="Your email" required />
+                <textarea id="message" rows="5" placeholder="Message"></textarea>
+                <button class="btn" type="submit">Send (mailto)</button>
+              </form>
+            </aside>
+          </div>
+          <p class="muted" style="text-align:center;margin-top:14px">© Abhishek Kushwaha — Built for recruiters and technical hiring managers.</p>
+        </div>
+      </section>
+
+    </div>
+    <div class="swiper-pagination"></div>
   </div>
-  
-  <button class="bt" id="topBtn" title="Back to top">↑</button>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // particles
+    tsParticles.load("tsparticles", {
+      particles:{ number:{ value:30, density:{ enable:true, value_area:900 } }, color:{ value:["#3a7bd5","#00d2ff","#8aa4ff"] },
+        shape:{ type:"circle" }, opacity:{ value:.25, random:true }, size:{ value:2, random:true }, move:{ enable:true, speed:0.8, out_mode:"out" } }, retina_detect:true
+    });
 
-      // --- 1. tsParticles INIT ---
-      tsParticles.load("tsparticles", {
-        particles: {
-          number: { value: 40, density: { enable: true, value_area: 800 } },
-          color: { value: "#00e6c3" },
-          shape: { type: "circle" },
-          opacity: {
-            value: 0.3,
-            random: true,
-            anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false },
-          },
-          size: {
-            value: 2,
-            random: true,
-            anim: { enable: false },
-          },
-          move: {
-            enable: true,
-            speed: 1,
-            direction: "none",
-            random: true,
-            straight: false,
-            out_mode: "out",
-            bounce: false,
-          },
+    // fullpage swiper
+    const swiper = new Swiper('#fullpage', {
+      direction: 'vertical',
+      speed: 800,
+      mousewheel: true,
+      keyboard: { enabled: true },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      grabCursor: true,
+      on: {
+        slideChange: () => {
+          // topbar highlight
+          document.querySelectorAll('#topbar a').forEach((a, i) => {
+            a.classList.toggle('active', i === swiper.activeIndex);
+          });
         },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: { enable: false },
-            onclick: { enable: false },
-          },
-        },
-        retina_detect: true,
-      });
-
-      // --- 2. TYPING ANIMATION SCRIPT ---
-      const typingElement = document.querySelector('.typing-text');
-      const textsToType = [
-        "Abhishek Kushwaha",
-        "a Data Scientist",
-        "a B.Tech Student"
-      ];
-      let textIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-
-      function type() {
-        const currentText = textsToType[textIndex];
-        let typeSpeed = 150; 
-
-        if (isDeleting) {
-          typingElement.textContent = currentText.substring(0, charIndex - 1);
-          charIndex--;
-          typeSpeed = 75; 
-        } else {
-          typingElement.textContent = currentText.substring(0, charIndex + 1);
-          charIndex++;
-        }
-
-        if (!isDeleting && charIndex === currentText.length) {
-          typeSpeed = 2000;
-          isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-          isDeleting = false;
-          textIndex = (textIndex + 1) % textsToType.length;
-          typeSpeed = 500; 
-        }
-        
-        setTimeout(type, typeSpeed);
-      }
-      type();
-
-
-      // --- 3. Scroll-triggered Fade-in Animation ---
-      const fadeElements = document.querySelectorAll('.fade-in');
-      const fadeInObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            fadeInObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      fadeElements.forEach(el => fadeInObserver.observe(el));
-
-      // --- 4. Active Navigation Link Highlighting ---
-      const sections = document.querySelectorAll('.page-section');
-      const navLinks = document.querySelectorAll('.nav-link');
-      const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(link => {
-              link.classList.remove('active');
-              // === CHANGED --- Check for new 'skills' section
-              if (link.getAttribute('href').substring(1) === entry.target.id) {
-                link.classList.add('active');
-              }
+        slideChangeTransitionStart: () => {
+          // subtle in animations
+          gsap.fromTo('.panel', { y: 20, opacity: 0.92 }, { y: 0, opacity: 1, duration: .6, ease: 'power3.out' });
+          // animate bars on skills slide
+          if (swiper.activeIndex === 1) {
+            document.querySelectorAll('.bar>span').forEach((el) => {
+              const w = el.style.width; el.style.width = '0';
+              gsap.to(el, { width: w, duration: 1.1, ease: 'power2.out', delay: 0.1 });
             });
           }
-        });
-      }, { rootMargin: '-30% 0px -70% 0px', threshold: 0 });
-      
-      // === CHANGED --- Manually add 'skills' to the observed sections
-      const allSections = [...sections, document.getElementById('skills')];
-      allSections.forEach(sec => navObserver.observe(sec));
-
-
-      // --- 5. Contact Form ---
-      document.getElementById('contactForm').addEventListener('submit', e => {
-        e.preventDefault();
-        const n = document.getElementById('name').value.trim(),
-          em = document.getElementById('email').value.trim(),
-          msg = document.getElementById('message').value.trim();
-        const mail = `mailto:abhishek.kushwaha.cs@gmail.com?subject=Contact from ${encodeURIComponent(n)}&body=${encodeURIComponent(msg)}%0A%0AFrom:%20${em}`;
-        window.location.href = mail;
-      });
-
-      // --- 6. Back to Top Button ---
-      const topBtn = document.getElementById('topBtn');
-      topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            topBtn.classList.add('visible');
-        } else {
-            topBtn.classList.remove('visible');
         }
-      });
+      }
+    });
+
+    // topbar navigation
+    document.querySelectorAll('#topbar a[data-go]').forEach(a => {
+      a.addEventListener('click', (e) => { e.preventDefault(); swiper.slideTo(parseInt(a.dataset.go, 10)); });
+    });
+
+    // CTA to projects
+    document.getElementById('gotoProjects')?.addEventListener('click', (e) => { e.preventDefault(); swiper.slideTo(2); });
+
+    // contact form (mailto)
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const n = document.getElementById('name').value.trim();
+      const em = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const mail = `mailto:abhishek.kushwaha.cs@gmail.com?subject=Contact from ${encodeURIComponent(n)}&body=${encodeURIComponent(msg)}%0A%0AFrom:%20${encodeURIComponent(em)}`;
+      window.location.href = mail;
     });
   </script>
 </body>
 </html>
-

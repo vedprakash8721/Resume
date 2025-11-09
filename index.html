@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Abhishek Kushwaha — Dynamic Slide Portfolio</title>
-  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE (AKTU) | Data Science & Generative AI. Aesthetic full‑screen slider portfolio with rich animations, projects, skills, education, and contact." />
+  <meta name="description" content="Abhishek Kushwaha — B.Tech CSE (AKTU) | Data Science & Generative AI. Full‑screen slider portfolio with live ML apps, projects, skills, education, and contact." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2718%27 ry=%2718%27 fill=%27%2300e6c3%27/><text x=%2750%27 y=%2770%27 text-anchor=%27middle%27 font-size=%2770%27 fill=%27%23011b19%27 font-family=%27Arial%27>AK</text></svg>">
 
   <!-- Swiper (full-page slides) -->
@@ -82,6 +82,11 @@
     .proj{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:16px;border-radius:14px}
     .proj h4{margin:0;color:#b8e3ff}
 
+    /* live badge */
+    .live-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);font-size:12px;color:#eafffb}
+    .live-dot{width:8px;height:8px;border-radius:999px;background:radial-gradient(circle, #ff6b6b 0, #d90429 60%, #8b0000 100%);box-shadow:0 0 10px rgba(255,60,60,.7);animation:pulse 1.4s infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+
     /* contact */
     .contact{display:grid;grid-template-columns:1fr 360px;gap:18px}
     input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(5,14,26,.6);color:#eaf4ff}
@@ -119,7 +124,7 @@
           <div>
             <h1 class="title">Hi — I’m <span style="background:linear-gradient(90deg,var(--grad-2),var(--grad-1));-webkit-background-clip:text;background-clip:text;color:transparent">Abhishek Kushwaha</span></h1>
             <div class="tag">Turning Data into Decisions • Final‑year B.Tech CSE</div>
-            <p class="muted" style="margin-top:10px">I build production‑aware ML models and intuitive visualizations that translate data into business outcomes. Focus areas: time‑series forecasting (LSTM), explainability, and deployable apps (Streamlit).</p>
+            <p class="muted" style="margin-top:10px">I ship production‑aware ML apps. Recent work: an LSTM‑based stock forecasting tool with EMA analytics, audit‑ready MAE/RMSE, and one‑click data exports—deployed on Streamlit for rapid decision support.</p>
             <div class="chips">
               <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Scikit‑learn</span><span class="chip">TensorFlow</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">SQL</span>
             </div>
@@ -191,18 +196,32 @@
             <div class="proj">
               <h4>Cricket Score Prediction</h4>
               <div class="chips" style="margin:8px 0"><span class="chip">Python</span><span class="chip">Scikit‑learn</span><span class="chip">Streamlit</span><span class="chip">Logistic Regression</span></div>
-              <p class="muted">Processed 72,000+ IPL deliveries with contextual features (over, wickets in hand, run rate). Built a real‑time Streamlit dashboard to simulate outcomes and explain predictions.</p>
+              <p class="muted">Developed a real-time IPL score prediction system using machine learning and feature engineering to forecast final scores based on live match parameters like overs, wickets, and run rate. Processed 72K+ IPL deliveries using Pandas and NumPy, engineered dynamic features, and optimized Logistic Regression and Random Forest models for high accuracy (R² > 0.88).
+Deployed an interactive Streamlit app enabling live input, visual analytics, and real-time simulation with a clean, data-driven interface.
+
+Tech Stack: Python, Pandas, NumPy, Scikit-learn, Streamlit, Matplotlib, ML</p>
               <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
                 <a class="btn" target="_blank" href="https://cricket-score-predictor-mbjesnzxgrdjkdn8s7d4yj.streamlit.app/">Live Demo</a>
                 <a class="btn" target="_blank" href="https://github.com/vedprakash8721/Cricket-Score-Predictor" style="background:linear-gradient(90deg,var(--grad-3),var(--grad-2))">Code</a>
               </div>
             </div>
             <div class="proj">
-              <h4>Stock Trend Forecasting</h4>
-              <div class="chips" style="margin:8px 0"><span class="chip">Python</span><span class="chip">TensorFlow</span><span class="chip">LSTM</span><span class="chip">Time Series</span></div>
-              <p class="muted">Sequence modeling for NIFTY 50 with walk‑forward validation; compared against ARIMA baselines. Delivered interpretable plots and clean notebooks for reproducibility.</p>
-              <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
-                <a class="btn" target="_blank" href="https://github.com/vedprakash8721/Stock-Trend-Forecasting">Code</a>
+              <h4>Stock Trend Forecasting — LSTM Web App</h4>
+              <div class="chips" style="margin:8px 0">
+                <span class="chip">Python</span>
+                <span class="chip">TensorFlow (Keras)</span>
+                <span class="chip">LSTM</span>
+                <span class="chip">Streamlit</span>
+                <span class="chip">yfinance</span>
+                <span class="chip">Time‑Series</span>
+              </div>
+              <p class="muted">Built a production-grade machine learning and deep learning system to forecast stock price trends using LSTM neural networks. Leveraged TensorFlow (Keras), NumPy, Pandas, and yfinance for sequence modeling and data preprocessing. Integrated MinMax scaling, EMA (20/50/100/200) analytics, and walk-forward validation for reliable time-series prediction.
+Deployed an interactive Streamlit web app enabling parameter tuning (sequence length, train split) and real-time price visualization with MAE/RMSE metrics, CSV/PNG downloads, and an intuitive dashboard for financial insights.
+
+Tech Stack: Python, TensorFlow (Keras), LSTM, Pandas, NumPy, yfinance, Scikit-learn, Streamlit, Matplotlib, Time-Series Forecasting</p>
+              <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;align-items:center">
+                <a class="btn" target="_blank" href="https://stock-trend-forecasting-mcbkpu2kwdpe4p7kyh6dhj.streamlit.app/">Live Demo</a>
+                <a class="btn" target="_blank" href="https://github.com/vedprakash8721/Stock-Trend-Forecasting" style="background:linear-gradient(90deg,var(--grad-3),var(--grad-2))">Code</a>
               </div>
             </div>
           </div>
@@ -336,4 +355,3 @@
   </script>
 </body>
 </html>
-
